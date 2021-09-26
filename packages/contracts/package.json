@@ -1,7 +1,7 @@
 {
-  "name": "cadence-contract",
+  "name": "matrix-world-flow-fest-cadence",
   "version": "0.0.1",
-  "description": "Matrix World Protocol cadence-contract",
+  "description": "Matrix World Flow Fest NFT cadence-contract",
   "main": "index.js",
   "author": "Xinyao(Alvin) Sun <Lukclyric@gmail.com> @ WhiteMatrix Tech Ltd.",
   "license": "MIT",

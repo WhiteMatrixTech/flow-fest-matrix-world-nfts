@@ -35,11 +35,7 @@
       }
     },
     "ExampleNFT": "./cadence/contracts/lib/ExampleNFT.cdc",
-    "MatrixWorldFlowFestNFTS1": "./cadence/contracts/MatrixWorldFlowFestNFTS1.cdc",
-    "MatrixWorldFlowFestNFTS2": "./cadence/contracts/MatrixWorldFlowFestNFTS2.cdc",
-    "MatrixWorldFlowFestNFTS3": "./cadence/contracts/MatrixWorldFlowFestNFTS3.cdc",
-    "MatrixWorldFlowFestNFTS4": "./cadence/contracts/MatrixWorldFlowFestNFTS4.cdc",
-    "MatrixWorldFlowFestNFTS5": "./cadence/contracts/MatrixWorldFlowFestNFTS5.cdc"
+    "MatrixWorldFlowFestNFT": "./cadence/contracts/MatrixWorldFlowFestNFT.cdc"
   },
   "networks": {
     "emulator": "127.0.0.1:3569",
@@ -47,7 +43,7 @@
     "testnet": "access.devnet.nodes.onflow.org:9000"
   },
   "accounts": {
-    "test-admin-account": {
+    "local-admin-account": {
       "address": "01cf0e2f2f715450",
       "key": "a996c6d610d93faf82ad5b15407b66d3a2b72a284b5c2fd4097b5a3e735a79e1",
       "chain": "flow-emulator"
@@ -60,13 +56,7 @@
   "deployments": {
     "emulator": {
       "emulator-account": ["FUSD", "NonFungibleToken"],
-      "test-admin-account": [
-        "MatrixWorldFlowFestNFTS1",
-        "MatrixWorldFlowFestNFTS2",
-        "MatrixWorldFlowFestNFTS3",
-        "MatrixWorldFlowFestNFTS4",
-        "MatrixWorldFlowFestNFTS5"
-      ]
+      "local-admin-account": ["MatrixWorldFlowFestNFT"]
     }
   }
 }

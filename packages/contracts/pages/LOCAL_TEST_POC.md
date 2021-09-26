@@ -10,14 +10,8 @@ export NODE="127.0.0.1:3569"
 export FUNTOKEN_ADDRESS=ee82856bf20e2aa6
 export NONFUNTOKEN_ADDRESS=f8d6e0586b0a20c7
 export FLOWTOKEN_ADDRESS=0ae53cb6e3f42a79
-export CONTRACT_NAME=MatrixWorldFlowFestNFTS1
+export CONTRACT_NAME=MatrixWorldFlowFestNFT
 export CONTRACT_ADDRESS=01cf0e2f2f715450
-```
-
-## Testnet Env
-
-```bash
-TBP
 ```
 
 ## Mainnet Env

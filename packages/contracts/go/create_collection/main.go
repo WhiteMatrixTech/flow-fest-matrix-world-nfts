@@ -21,10 +21,10 @@ transaction {
             let collection <- %s.createEmptyCollection()
 
             signer.save(<-collection, to: %s.CollectionStoragePath)
-            signer.link<&%s.Collection{NonFungibleToken.CollectionPublic, %s.MatrixWorldFlowFestNFTCollectionPublic}>(%s.CollectionPublicPath, target: %s.CollectionStoragePath)
+            signer.link<&%s.Collection{NonFungibleToken.CollectionPublic, %s.%sCollectionPublic}>(%s.CollectionPublicPath, target: %s.CollectionStoragePath)
         }
     }
-}`, common.Config.NonFungibleTokenAddress, common.Config.ContractName, common.Config.ContractAddress, common.Config.ContractName, common.Config.ContractName, common.Config.ContractName, common.Config.ContractName, common.Config.ContractName, common.Config.ContractName, common.Config.ContractName, common.Config.ContractName)
+}`, common.Config.NonFungibleTokenAddress, common.Config.ContractName, common.Config.ContractAddress, common.Config.ContractName, common.Config.ContractName, common.Config.ContractName, common.Config.ContractName, common.Config.ContractName, common.Config.ContractName, common.Config.ContractName, common.Config.ContractName, common.Config.ContractName)
 
 func main() {
 	ctx := context.Background()

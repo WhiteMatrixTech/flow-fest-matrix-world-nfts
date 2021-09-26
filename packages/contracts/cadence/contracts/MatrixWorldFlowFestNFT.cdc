@@ -1,6 +1,6 @@
 import NonFungibleToken from "./lib/NonFungibleToken.cdc"
 
-pub contract MatrixWorldFlowFestNFTS1: NonFungibleToken {
+pub contract MatrixWorldFlowFestNFT: NonFungibleToken {
     pub event ContractInitialized()
     pub event Withdraw(id: UInt64, from: Address?)
     pub event Deposit(id: UInt64, to: Address?)
@@ -46,10 +46,10 @@ pub contract MatrixWorldFlowFestNFTS1: NonFungibleToken {
         pub fun deposit(token: @NonFungibleToken.NFT)
         pub fun getIDs(): [UInt64]
         pub fun borrowNFT(id: UInt64): &NonFungibleToken.NFT
-        pub fun borrowArt(id: UInt64): &MatrixWorldFlowFestNFTS1.NFT? {
+        pub fun borrowVoucher(id: UInt64): &MatrixWorldFlowFestNFT.NFT? {
             post {
                 (result == nil) || (result?.id == id):
-                    "Cannot borrow MatrixWorldFlowFestNFT reference: The ID of the returned reference is incorrect"
+                    "Cannot borrow MatrixWorldVoucher reference: The ID of the returned reference is incorrect"
             }
         }
     }
@@ -66,7 +66,7 @@ pub contract MatrixWorldFlowFestNFTS1: NonFungibleToken {
         }
 
         pub fun deposit(token: @NonFungibleToken.NFT) {
-            let token <- token as! @MatrixWorldFlowFestNFTS1.NFT
+            let token <- token as! @MatrixWorldFlowFestNFT.NFT
 
             let id: UInt64 = token.id
 
@@ -86,10 +86,10 @@ pub contract MatrixWorldFlowFestNFTS1: NonFungibleToken {
             return &self.ownedNFTs[id] as &NonFungibleToken.NFT
         }
 
-        pub fun borrowArt(id: UInt64): &MatrixWorldFlowFestNFTS1.NFT? {
+        pub fun borrowVoucher(id: UInt64): &MatrixWorldFlowFestNFT.NFT? {
             if self.ownedNFTs[id] != nil {
                 let ref = &self.ownedNFTs[id] as auth &NonFungibleToken.NFT
-                return ref as! &MatrixWorldFlowFestNFTS1.NFT
+                return ref as! &MatrixWorldFlowFestNFT.NFT
             } else {
                 return nil
             }
@@ -109,25 +109,25 @@ pub contract MatrixWorldFlowFestNFTS1: NonFungibleToken {
     }
 
     pub struct NftData {
-        pub let metadata: MatrixWorldFlowFestNFTS1.Metadata
+        pub let metadata: MatrixWorldFlowFestNFT.Metadata
         pub let id: UInt64
-        init(metadata: MatrixWorldFlowFestNFTS1.Metadata, id: UInt64) {
+        init(metadata: MatrixWorldFlowFestNFT.Metadata, id: UInt64) {
             self.metadata= metadata
             self.id=id
         }
     }
 
     pub fun getNft(address:Address) : [NftData] {
-        var artData: [NftData] = []
+        var nftData: [NftData] = []
         let account = getAccount(address)
 
-        if let artCollection = account.getCapability(self.CollectionPublicPath).borrow<&{MatrixWorldFlowFestNFTS1.MatrixWorldFlowFestNFTCollectionPublic}>()  {
-            for id in artCollection.getIDs() {
-                var art = artCollection.borrowArt(id: id)
-                artData.append(NftData(metadata: art!.metadata,id: id))
+        if let nftCollection = account.getCapability(self.CollectionPublicPath).borrow<&{MatrixWorldFlowFestNFT.MatrixWorldFlowFestNFTCollectionPublic}>()  {
+            for id in nftCollection.getIDs() {
+                var nft = nftCollection.borrowVoucher(id: id)
+                nftData.append(NftData(metadata: nft!.metadata,id: id))
             }
         }
-        return artData
+        return nftData
     }
 
 	pub resource NFTMinter {
@@ -138,10 +138,10 @@ pub contract MatrixWorldFlowFestNFTS1: NonFungibleToken {
             animationUrl: String
             hash: String,
             type: String) {
-            emit Minted(id: MatrixWorldFlowFestNFTS1.totalSupply, name: name, description: description, animationUrl: animationUrl, hash: hash, type: type)
+            emit Minted(id: MatrixWorldFlowFestNFT.totalSupply, name: name, description: description, animationUrl: animationUrl, hash: hash, type: type)
 
-			recipient.deposit(token: <-create MatrixWorldFlowFestNFTS1.NFT(
-			    initID: MatrixWorldFlowFestNFTS1.totalSupply,
+			recipient.deposit(token: <-create MatrixWorldFlowFestNFT.NFT(
+			    initID: MatrixWorldFlowFestNFT.totalSupply,
 			    metadata: Metadata(
                     name: name,
                     description:description,
@@ -150,14 +150,14 @@ pub contract MatrixWorldFlowFestNFTS1: NonFungibleToken {
                     type: type
                 )))
 
-            MatrixWorldFlowFestNFTS1.totalSupply = MatrixWorldFlowFestNFTS1.totalSupply + (1 as UInt64)
+            MatrixWorldFlowFestNFT.totalSupply = MatrixWorldFlowFestNFT.totalSupply + (1 as UInt64)
 		}
 	}
 
     init() {
-        self.CollectionStoragePath = /storage/MatrixWorldFlowFestNFTS1Collection
-        self.CollectionPublicPath = /public/MatrixWorldFlowFestNFTS1Collection
-        self.MinterStoragePath = /storage/MatrixWorldFlowFestNFTS1Minter
+        self.CollectionStoragePath = /storage/MatrixWorldFlowFestNFTCollection
+        self.CollectionPublicPath = /public/MatrixWorldFlowFestNFTCollection
+        self.MinterStoragePath = /storage/MatrixWorldFlowFestNFTrMinter
 
         self.totalSupply = 0
 

@@ -115,7 +115,8 @@ func writeLock(fileName string, data [][]string) {
 
 func main() {
 	fileName := os.Args[1]
-	batchSize := 100
+	batchSize := 300
+    baseUri := "https://matrixworld.org/flowfest/"
 
 	lockFileName := fileName + ".lock"
 	_, err := os.Stat(lockFileName) // file does not exist
@@ -165,7 +166,7 @@ func main() {
 			names = append(names, name)
 			des, _ := cadence.NewValue(fmt.Sprintf("%s, %s/%s", rowInfo[3], rowInfo[6], rowInfo[7]))
 			descriptions = append(descriptions, des)
-			aniUrl, _ := cadence.NewValue(rowInfo[4])
+			aniUrl, _ := cadence.NewValue(rowInfo[8])
 			aniUrls = append(aniUrls, aniUrl)
 			hash, _ := cadence.NewValue("")
 			hashes = append(hashes, hash)
@@ -256,6 +257,7 @@ func main() {
 			if strings.Contains(event.Type, common.Config.ContractName+".Minted") {
 				tokenId := event.Value.Fields[0].(cadence.UInt64)
 				records[i+mintCount][0] = tokenId.String()
+				records[i+mintCount][4] = baseUri + tokenId.String()
 
 				tokenIds = append(tokenIds, tokenId)
 

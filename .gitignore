@@ -1,3 +1,11 @@
 
 packages/contracts/pages/TESTNET_TEST_POC.md
 packages/contracts/flow.testnet.json
+packages/contracts/pages/MAINNET_TEST_POC.md
+packages/contracts/flow.mainnet.json
+packages/contracts/assets/flow-fest-final-testnet.csv
+packages/contracts/assets/flow-fest-final.csv.lock
+packages/contracts/assets/flow-fest-final.xlsx
+packages/contracts/assets/flow-fest.csv
+packages/contracts/assets/flow-fest.csv.lock
+packages/contracts/assets/flow-fest.xlsx

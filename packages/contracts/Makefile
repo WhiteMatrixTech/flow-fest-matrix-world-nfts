@@ -17,3 +17,7 @@ mint-nft:
 list-nfts:
 	cd go && go run list_nfts/main.go
 .PHONY: list-nfts
+
+bootstrap-local:
+	bash ./sh/bootstrap-local.sh
+.PHONY: bootstrap-local

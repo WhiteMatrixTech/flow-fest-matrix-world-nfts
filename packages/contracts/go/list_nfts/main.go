@@ -46,4 +46,5 @@ func main() {
 	ID := value.(cadence.Array)
 
 	fmt.Println(ID.ToGoValue())
+	fmt.Println(len(ID.Values))
 }

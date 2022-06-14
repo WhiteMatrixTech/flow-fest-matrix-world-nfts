@@ -83,12 +83,12 @@ pub contract MatrixWorldFlowFestNFT: NonFungibleToken {
         }
 
         pub fun borrowNFT(id: UInt64): &NonFungibleToken.NFT {
-            return &self.ownedNFTs[id] as &NonFungibleToken.NFT
+            return (&self.ownedNFTs[id] as &NonFungibleToken.NFT?)!
         }
 
         pub fun borrowVoucher(id: UInt64): &MatrixWorldFlowFestNFT.NFT? {
             if self.ownedNFTs[id] != nil {
-                let ref = &self.ownedNFTs[id] as auth &NonFungibleToken.NFT
+                let ref = (&self.ownedNFTs[id] as auth &NonFungibleToken.NFT?)!
                 return ref as! &MatrixWorldFlowFestNFT.NFT
             } else {
                 return nil
@@ -135,7 +135,7 @@ pub contract MatrixWorldFlowFestNFT: NonFungibleToken {
             recipient: &{NonFungibleToken.CollectionPublic},
             name: String,
             description: String,
-            animationUrl: String
+            animationUrl: String,
             hash: String,
             type: String) {
             emit Minted(id: MatrixWorldFlowFestNFT.totalSupply, name: name, description: description, animationUrl: animationUrl, hash: hash, type: type)
